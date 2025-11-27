@@ -111,3 +111,16 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+@app.route('/upload-test', methods=['GET'])
+def upload_test_page():
+    return """
+    <html>
+      <body>
+        <h2>Image Upload Test</h2>
+        <form action="/upload-image" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" />
+            <button type="submit">Upload</button>
+        </form>
+      </body>
+    </html>
+    """
