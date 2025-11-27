@@ -118,7 +118,7 @@ def upload_test_page():
       <body>
         <h2>Image Upload Test</h2>
         <form action="/upload-image" method="post" enctype="multipart/form-data">
-            <input type="file" name="image" />
+            <input type="file" name="file" />
             <button type="submit">Upload</button>
         </form>
       </body>
