@@ -34,9 +34,8 @@ s3 = boto3.client(
 def ping():
     return jsonify({"status": "ok", "message": "Central Data Engine running"})
 
-
 ###############################
-# UPLOAD IMAGE → R2
+# UPLOAD IMAGE
 ###############################
 @app.route("/upload-image", methods=["POST"])
 def upload_image():
@@ -57,7 +56,6 @@ def upload_image():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 ###############################
 # DOWNLOAD IMAGE
 ###############################
@@ -68,7 +66,6 @@ def get_image(filename):
         return send_file(BytesIO(obj["Body"].read()), mimetype=obj["ContentType"])
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 ###############################
 # SAVE JSON
@@ -93,7 +90,6 @@ def save_json():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 ###############################
 # LOAD JSON
 ###############################
@@ -106,16 +102,10 @@ def get_json(key):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 ###############################
-# MAIN
+# UPLOAD TEST PAGE
 ###############################
-@app.route("/")
-def home():
-    return jsonify({"message": "Ai Trading Lab Central Data Engine v1.0"})
-
-
-@app.route("/upload-test", methods=["GET"])
+@app.route('/upload-test', methods=['GET'])
 def upload_test_page():
     return """
     <html>
@@ -129,6 +119,9 @@ def upload_test_page():
     </html>
     """
 
+@app.route("/")
+def home():
+    return jsonify({"message": "Ai Trading Lab Central Data Engine v1.0"})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
