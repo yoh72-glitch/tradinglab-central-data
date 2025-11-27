@@ -10,16 +10,19 @@ app = Flask(__name__)
 # Cloudflare R2 CONFIG
 ###############################
 R2_BUCKET = os.environ.get("R2_BUCKET")
-R2_ACCESS_KEY = os.environ.get("R2_ACCESS_KEY")
-R2_SECRET_KEY = os.environ.get("R2_SECRET_KEY")
-R2_ENDPOINT = os.environ.get("R2_ENDPOINT")  # e.g. https://<accountid>.r2.cloudflarestorage.com
+
+CF_ACCOUNT_ID = os.environ.get("CF_ACCOUNT_ID")
+CF_API_TOKEN = os.environ.get("CF_API_TOKEN")
+
+R2_ENDPOINT = f"https://{CF_ACCOUNT_ID}.r2.cloudflarestorage.com"
 
 s3 = boto3.client(
     "s3",
     endpoint_url=R2_ENDPOINT,
-    aws_access_key_id=R2_ACCESS_KEY,
-    aws_secret_access_key=R2_SECRET_KEY
+    aws_access_key_id=CF_API_TOKEN,   # API Token 사용
+    aws_secret_access_key=CF_API_TOKEN  # Secret Key 대신 동일한 값 사용
 )
+
 
 ###############################
 # TEST ENDPOINT
